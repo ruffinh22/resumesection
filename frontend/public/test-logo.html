@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Logo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 40px;
+            padding: 40px;
+            background: #f0f0f0;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-box h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: block;
+        }
+        .size-sm { width: 48px; height: 48px; }
+        .size-md { width: 80px; height: 80px; }
+        .size-lg { width: 120px; height: 120px; }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h3>Logo Principal (Full)</h3>
+        <img src="/church-logo.svg" alt="Logo Full Small" class="size-sm">
+        <img src="/church-logo.svg" alt="Logo Full Medium" class="size-md">
+        <img src="/church-logo.svg" alt="Logo Full Large" class="size-lg">
+    </div>
+
+    <div class="test-box">
+        <h3>Logo Compact</h3>
+        <img src="/church-logo-compact.svg" alt="Logo Compact Small" class="size-sm">
+        <img src="/church-logo-compact.svg" alt="Logo Compact Medium" class="size-md">
+        <img src="/church-logo-compact.svg" alt="Logo Compact Large" class="size-lg">
+    </div>
+
+    <div class="test-box">
+        <h3>Debug Info</h3>
+        <p>Si vous voyez les logos ci-dessus, c'est que tout fonctionne !</p>
+        <p><strong>Chemins testés :</strong></p>
+        <ul>
+            <li>/church-logo.svg</li>
+            <li>/church-logo-compact.svg</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: resumesection_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: resumesection_db
+      MYSQL_USER: resumesection_user
+      MYSQL_PASSWORD: resumesection_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - resumesection_net
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: resumesection_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - resumesection_net
+
+volumes:
+  mysql_data:
+
+networks:
+  resumesection_net:
+    driver: bridge

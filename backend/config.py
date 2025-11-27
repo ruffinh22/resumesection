@@ -15,9 +15,23 @@ class Config:
     # Clé secrète pour les sessions
     SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
     
-    # Database - Utiliser un chemin absolu
-    db_path = os.path.join(INSTANCE_DIR, 'dev.db')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', f'sqlite:///{db_path}')
+    # Database Configuration
+    # En développement: SQLite (par défaut)
+    # En production: MySQL (via DATABASE_URL)
+    if os.environ.get('FLASK_ENV') == 'production':
+        # Production: MySQL via Docker ou serveur externe
+        SQLALCHEMY_DATABASE_URI = os.environ.get(
+            'DATABASE_URL', 
+            'mysql+pymysql://resumesection_user:resumesection_password@localhost:3306/resumesection_db'
+        )
+    else:
+        # Développement: SQLite local
+        db_path = os.path.join(INSTANCE_DIR, 'dev.db')
+        SQLALCHEMY_DATABASE_URI = os.environ.get(
+            'DATABASE_URL', 
+            f'sqlite:///{db_path}'
+        )
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # JWT Configuration

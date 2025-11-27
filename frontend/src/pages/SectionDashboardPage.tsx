@@ -104,24 +104,24 @@ const SectionDashboardPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header */}
-      <div className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+      {/* Header - Responsive */}
+      <div className="bg-white shadow sticky top-0 z-50">
+        <div className="w-full px-3 sm:px-4 lg:px-8 py-3 sm:py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
               <img 
                 src={getLogoUrl('compact')} 
                 alt="Logo Église Évangélique" 
-                className="h-16 w-16"
+                className="h-10 sm:h-12 lg:h-16 w-10 sm:w-12 lg:w-16 flex-shrink-0"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
-              <div>
-                <h1 className="text-3xl font-bold text-slate-900">
-                  Tableau de Bord Section
+              <div className="flex-1 min-w-0">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 truncate">
+                  Tableau de Bord
                 </h1>
-                <p className="text-slate-600 mt-1">
+                <p className="text-xs sm:text-sm text-slate-600 mt-0.5 truncate">
                   Bienvenue {user.username}
                 </p>
               </div>
@@ -129,51 +129,57 @@ const SectionDashboardPage: React.FC = () => {
             <Button
               onClick={handleLogout}
               variant="destructive"
-              className="flex items-center gap-2"
+              size="sm"
+              className="flex items-center gap-2 w-full sm:w-auto justify-center text-xs sm:text-base"
             >
-              <LogOut className="w-4 h-4" />
-              Déconnexion
+              <LogOut className="w-3 sm:w-4 h-3 sm:h-4" />
+              <span className="hidden sm:inline">Déconnexion</span>
+              <span className="sm:hidden">Déco</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full px-3 sm:px-4 lg:px-8 py-4 sm:py-8">
         
-        {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-8 flex-wrap">
+        {/* Navigation Tabs - Responsive */}
+        <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-8 -mx-3 sm:mx-0 px-3 sm:px-0 overflow-x-auto">
           <Button
             onClick={() => setActiveTab('stats')}
             variant={activeTab === 'stats' ? 'default' : 'outline'}
-            className="flex items-center gap-2"
+            className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex-shrink-0"
           >
-            <BarChart3 className="w-4 h-4" />
-            Statistiques
+            <BarChart3 className="w-3 sm:w-4 h-3 sm:h-4" />
+            <span className="hidden sm:inline">Statistiques</span>
+            <span className="sm:hidden">Stats</span>
           </Button>
           <Button
             onClick={() => setActiveTab('create')}
             variant={activeTab === 'create' ? 'default' : 'outline'}
-            className="flex items-center gap-2"
+            className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex-shrink-0"
           >
-            <Plus className="w-4 h-4" />
-            Créer un Rapport
+            <Plus className="w-3 sm:w-4 h-3 sm:h-4" />
+            <span className="hidden sm:inline">Créer</span>
+            <span className="sm:hidden">+</span>
           </Button>
           <Button
             onClick={() => setActiveTab('reports')}
             variant={activeTab === 'reports' ? 'default' : 'outline'}
-            className="flex items-center gap-2"
+            className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex-shrink-0"
           >
-            <Eye className="w-4 h-4" />
-            Voir les Rapports
+            <Eye className="w-3 sm:w-4 h-3 sm:h-4" />
+            <span className="hidden sm:inline">Rapports</span>
+            <span className="sm:hidden">Voir</span>
           </Button>
           <Button
             onClick={() => setActiveTab('history')}
             variant={activeTab === 'history' ? 'default' : 'outline'}
-            className="flex items-center gap-2"
+            className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 flex-shrink-0"
           >
-            <History className="w-4 h-4" />
-            Historique
+            <History className="w-3 sm:w-4 h-3 sm:h-4" />
+            <span className="hidden sm:inline">Historique</span>
+            <span className="sm:hidden">Hist</span>
           </Button>
         </div>
 
@@ -192,21 +198,21 @@ const SectionDashboardPage: React.FC = () => {
             {statsLoading ? (
               <Card>
                 <CardContent className="pt-6">
-                  <div className="text-center text-slate-500">
+                  <div className="text-center text-slate-500 text-sm">
                     Chargement des statistiques...
                   </div>
                 </CardContent>
               </Card>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
                 {/* Total Quetes */}
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Quêtes</CardTitle>
-                    <TrendingUp className="h-4 w-4 text-blue-600" />
+                <Card className="overflow-hidden">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                    <CardTitle className="text-xs sm:text-sm font-medium truncate">Total Quêtes</CardTitle>
+                    <TrendingUp className="h-3 sm:h-4 w-3 sm:w-4 text-blue-600 flex-shrink-0" />
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
+                  <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                    <div className="text-base sm:text-2xl font-bold break-words">
                       {formatCFA(displayStats.total_offering)}
                     </div>
                     <p className="text-xs text-slate-500 mt-1">
@@ -216,13 +222,13 @@ const SectionDashboardPage: React.FC = () => {
                 </Card>
 
                 {/* Moyenne par Quete */}
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Moyenne</CardTitle>
-                    <BarChart3 className="h-4 w-4 text-green-600" />
+                <Card className="overflow-hidden">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                    <CardTitle className="text-xs sm:text-sm font-medium truncate">Moyenne</CardTitle>
+                    <BarChart3 className="h-3 sm:h-4 w-3 sm:w-4 text-green-600 flex-shrink-0" />
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
+                  <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                    <div className="text-base sm:text-2xl font-bold break-words">
                       {formatCFA(displayStats.average_offering)}
                     </div>
                     <p className="text-xs text-slate-500 mt-1">
@@ -232,13 +238,13 @@ const SectionDashboardPage: React.FC = () => {
                 </Card>
 
                 {/* Total Attendance */}
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Présents</CardTitle>
-                    <Users className="h-4 w-4 text-purple-600" />
+                <Card className="overflow-hidden">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                    <CardTitle className="text-xs sm:text-sm font-medium">Présents</CardTitle>
+                    <Users className="h-3 sm:h-4 w-3 sm:w-4 text-purple-600" />
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">
+                  <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                    <div className="text-lg sm:text-2xl font-bold">
                       {displayStats.total_attendees}
                     </div>
                     <p className="text-xs text-slate-500 mt-1">
@@ -248,14 +254,14 @@ const SectionDashboardPage: React.FC = () => {
                 </Card>
 
                 {/* Semaine */}
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Semaine</CardTitle>
-                    <AlertCircle className="h-4 w-4 text-orange-600" />
+                <Card className="overflow-hidden">
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6">
+                    <CardTitle className="text-xs sm:text-sm font-medium">Semaine</CardTitle>
+                    <AlertCircle className="h-3 sm:h-4 w-3 sm:w-4 text-orange-600" />
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-xl font-bold">
-                      {`${new Date(displayStats.week_start).toLocaleDateString('fr-FR')} - ${new Date(displayStats.week_end).toLocaleDateString('fr-FR')}`}
+                  <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
+                    <div className="text-sm sm:text-xl font-bold line-clamp-2">
+                      {`${new Date(displayStats.week_start).toLocaleDateString('fr-FR', {year: '2-digit', month: '2-digit', day: '2-digit'})} - ${new Date(displayStats.week_end).toLocaleDateString('fr-FR', {year: '2-digit', month: '2-digit', day: '2-digit'})}`}
                     </div>
                     <p className="text-xs text-slate-500 mt-1">
                       Semaine actuelle
@@ -266,11 +272,11 @@ const SectionDashboardPage: React.FC = () => {
             )}
 
             {/* Info Message */}
-            <Card className="bg-blue-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="text-slate-900">À propos de votre section</CardTitle>
+            <Card className="bg-blue-50 border-blue-200 overflow-hidden">
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-base sm:text-lg text-slate-900">À propos de votre section</CardTitle>
               </CardHeader>
-              <CardContent className="text-slate-600">
+              <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0 text-slate-600 text-sm">
                 <p>
                   Ce tableau de bord affiche uniquement les données de votre section.
                   Vous pouvez créer des rapports, consulter vos rapports précédents et
@@ -280,126 +286,184 @@ const SectionDashboardPage: React.FC = () => {
             </Card>
 
             {/* Tableau détaillé de tous les rapports */}
-            <Card>
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <CardTitle>Tous les rapports de votre section</CardTitle>
-                    <CardDescription>Tableau professionnel avec toutes les colonnes</CardDescription>
+            <Card className="overflow-hidden">
+              <CardHeader className="p-3 sm:p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                  <div className="flex-1 min-w-0">
+                    <CardTitle className="text-base sm:text-lg">Tous les rapports</CardTitle>
+                    <CardDescription className="text-xs sm:text-sm">Tableau professionnel avec toutes les colonnes</CardDescription>
                   </div>
                   {reports.length > 0 && (
                     <Button
                       onClick={handleDownloadAllReports}
                       variant="outline"
-                      className="text-blue-600 hover:text-blue-700"
+                      size="sm"
+                      className="text-blue-600 hover:text-blue-700 w-full sm:w-auto text-xs sm:text-sm"
                     >
-                      <Download className="h-4 w-4 mr-2" />
-                      Télécharger tous les rapports
+                      <Download className="h-3 sm:h-4 w-3 sm:w-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Télécharger tous</span>
+                      <span className="sm:hidden">Télécharger</span>
                     </Button>
                   )}
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
                 {reportsLoading ? (
-                  <div className="text-center text-slate-500">Chargement des rapports...</div>
+                  <div className="text-center text-slate-500 text-sm py-4">Chargement des rapports...</div>
                 ) : reports.length === 0 ? (
-                  <div className="text-center text-slate-500 py-8">
-                    Aucun rapport enregistré pour votre section
+                  <div className="text-center text-slate-500 text-sm py-8">
+                    Aucun rapport enregistré
                   </div>
                 ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm border-collapse">
-                      <thead>
-                        <tr className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-                          <th className="py-3 px-4 text-left font-semibold border border-blue-800">Date</th>
-                          <th className="py-3 px-4 text-left font-semibold border border-blue-800">Prédicateur</th>
-                          <th className="py-3 px-4 text-right font-semibold border border-blue-800">Total</th>
-                          <th className="py-3 px-4 text-right font-semibold border border-blue-800">👨 Hommes</th>
-                          <th className="py-3 px-4 text-right font-semibold border border-blue-800">👩 Femmes</th>
-                          <th className="py-3 px-4 text-right font-semibold border border-blue-800">👧 Enfants</th>
-                          <th className="py-3 px-4 text-right font-semibold border border-blue-800">🧑 Jeunes</th>
-                          <th className="py-3 px-4 text-right font-semibold border border-blue-800">💰 Offrande</th>
-                          <th className="py-3 px-4 text-center font-semibold border border-blue-800">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {reports.map((report, idx) => (
-                          <tr
-                            key={report.id}
-                            className={`${
-                              idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
-                            } border-b border-slate-200 hover:bg-blue-50 transition`}
-                          >
-                            <td className="py-3 px-4 border border-slate-200">
-                              {new Date(report.date).toLocaleDateString('fr-FR')}
-                            </td>
-                            <td className="py-3 px-4 border border-slate-200 font-medium">
-                              {report.preacher}
-                            </td>
-                            <td className="py-3 px-4 text-right border border-slate-200 font-bold text-blue-600">
-                              {report.total_attendees}
-                            </td>
-                            <td className="py-3 px-4 text-right border border-slate-200 text-blue-500 font-medium">
-                              {report.men}
-                            </td>
-                            <td className="py-3 px-4 text-right border border-slate-200 text-pink-500 font-medium">
-                              {report.women}
-                            </td>
-                            <td className="py-3 px-4 text-right border border-slate-200 text-green-500 font-medium">
-                              {report.children}
-                            </td>
-                            <td className="py-3 px-4 text-right border border-slate-200 text-amber-500 font-medium">
-                              {report.youth}
-                            </td>
-                            <td className="py-3 px-4 text-right border border-slate-200 font-bold text-amber-600">
-                              {(report.offering).toLocaleString('fr-FR')} XOF
-                            </td>
-                            <td className="py-3 px-4 text-center border border-slate-200">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => handleDownloadReport(report)}
-                                disabled={downloadingId === report.id}
-                                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                              >
-                                <Download className="h-4 w-4" />
-                              </Button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    
-                    {/* Résumé */}
-                    {reports.length > 0 && (
-                      <div className="mt-6 p-4 bg-gradient-to-r from-slate-50 to-blue-50 border border-blue-200 rounded-lg">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                          <div>
-                            <p className="text-xs text-slate-600 font-semibold">Total Rapports</p>
-                            <p className="text-xl font-bold text-slate-900">{reports.length}</p>
+                  <>
+                    {/* Mobile: Cartes */}
+                    <div className="sm:hidden space-y-3">
+                      {reports.map((report) => (
+                        <div key={report.id} className="bg-gradient-to-r from-slate-50 to-blue-50 border border-slate-200 rounded-lg p-3 space-y-2">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="text-xs font-semibold text-slate-600">Date</p>
+                              <p className="text-sm font-bold">{new Date(report.date).toLocaleDateString('fr-FR')}</p>
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleDownloadReport(report)}
+                              disabled={downloadingId === report.id}
+                              className="text-blue-600 hover:bg-blue-100"
+                            >
+                              <Download className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2 text-xs">
+                            <div>
+                              <p className="font-semibold text-slate-600">Prédicateur</p>
+                              <p className="font-medium">{report.preacher}</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-slate-600">Total</p>
+                              <p className="font-bold text-blue-600">{report.total_attendees}</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-slate-600">👨 Hommes</p>
+                              <p className="text-blue-500">{report.men}</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-slate-600">👩 Femmes</p>
+                              <p className="text-pink-500">{report.women}</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-slate-600">👧 Enfants</p>
+                              <p className="text-green-500">{report.children}</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-slate-600">🧑 Jeunes</p>
+                              <p className="text-amber-500">{report.youth}</p>
+                            </div>
                           </div>
                           <div>
-                            <p className="text-xs text-slate-600 font-semibold">Total Fidèles</p>
-                            <p className="text-xl font-bold text-blue-600">
+                            <p className="font-semibold text-slate-600 text-xs">💰 Offrande</p>
+                            <p className="font-bold text-amber-600">{(report.offering).toLocaleString('fr-FR')} XOF</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Desktop: Table */}
+                    <div className="hidden sm:block overflow-x-auto">
+                      <table className="w-full text-xs sm:text-sm border-collapse">
+                        <thead>
+                          <tr className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-left font-semibold border border-blue-800">Date</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-left font-semibold border border-blue-800">Prédicateur</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800">Total</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">👨</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">👩</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">👧</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">🧑</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800">💰</th>
+                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-center font-semibold border border-blue-800">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {reports.map((report, idx) => (
+                            <tr
+                              key={report.id}
+                              className={`${
+                                idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
+                              } border-b border-slate-200 hover:bg-blue-50 transition`}
+                            >
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 border border-slate-200 text-xs sm:text-sm">
+                                {new Date(report.date).toLocaleDateString('fr-FR')}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 border border-slate-200 font-medium text-xs sm:text-sm">
+                                {report.preacher}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 font-bold text-blue-600 text-xs sm:text-sm">
+                                {report.total_attendees}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-blue-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                                {report.men}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-pink-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                                {report.women}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-green-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                                {report.children}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-amber-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                                {report.youth}
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 font-bold text-amber-600 text-xs sm:text-sm">
+                                {(report.offering).toLocaleString('fr-FR')} XOF
+                              </td>
+                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-center border border-slate-200">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleDownloadReport(report)}
+                                  disabled={downloadingId === report.id}
+                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 h-7 w-7 p-0"
+                                >
+                                  <Download className="h-3 sm:h-4 w-3 sm:w-4" />
+                                </Button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                    {/* Résumé - Responsive */}
+                    {reports.length > 0 && (
+                      <div className="mt-4 sm:mt-6 p-2 sm:p-4 bg-gradient-to-r from-slate-50 to-blue-50 border border-blue-200 rounded-lg overflow-hidden">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
+                          <div className="min-w-0">
+                            <p className="text-xs text-slate-600 font-semibold truncate">Rapports</p>
+                            <p className="text-base sm:text-xl font-bold text-slate-900 truncate">{reports.length}</p>
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-xs text-slate-600 font-semibold truncate">Fidèles</p>
+                            <p className="text-base sm:text-xl font-bold text-blue-600 truncate">
                               {reports.reduce((sum, r) => sum + (r.total_attendees || 0), 0).toLocaleString()}
                             </p>
                           </div>
-                          <div>
-                            <p className="text-xs text-slate-600 font-semibold">Offrande Totale</p>
-                            <p className="text-xl font-bold text-amber-600">
-                              {reports.reduce((sum, r) => sum + (r.offering || 0), 0).toLocaleString('fr-FR')} XOF
+                          <div className="min-w-0">
+                            <p className="text-xs text-slate-600 font-semibold truncate">Offrande</p>
+                            <p className="text-xs sm:text-base lg:text-xl font-bold text-amber-600 truncate">
+                              {Math.round(reports.reduce((sum, r) => sum + (r.offering || 0), 0) / 1000)}K XOF
                             </p>
                           </div>
-                          <div>
-                            <p className="text-xs text-slate-600 font-semibold">Moyenne par Rapport</p>
-                            <p className="text-xl font-bold text-green-600">
-                              {(reports.reduce((sum, r) => sum + (r.offering || 0), 0) / reports.length).toLocaleString('fr-FR')} XOF
+                          <div className="min-w-0">
+                            <p className="text-xs text-slate-600 font-semibold truncate">Moyenne</p>
+                            <p className="text-xs sm:text-base lg:text-xl font-bold text-green-600 truncate">
+                              {Math.round(reports.reduce((sum, r) => sum + (r.offering || 0), 0) / reports.length / 1000)}K XOF
                             </p>
                           </div>
                         </div>
                       </div>
                     )}
-                  </div>
+                  </>
                 )}
               </CardContent>
             </Card>
@@ -408,15 +472,15 @@ const SectionDashboardPage: React.FC = () => {
 
         {/* Create Report Tab */}
         {activeTab === 'create' && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Créer un nouveau rapport</CardTitle>
-                <CardDescription>
+          <div className="space-y-4 sm:space-y-6">
+            <Card className="overflow-hidden">
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">Créer un nouveau rapport</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
                   Enregistrez les données de quête de votre section
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
                 <ReportForm onSuccess={() => setActiveTab('reports')} />
               </CardContent>
             </Card>
@@ -425,15 +489,15 @@ const SectionDashboardPage: React.FC = () => {
 
         {/* Reports Tab */}
         {activeTab === 'reports' && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Rapports de votre section</CardTitle>
-                <CardDescription>
+          <div className="space-y-4 sm:space-y-6">
+            <Card className="overflow-hidden">
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">Rapports de votre section</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
                   Tous les rapports que vous avez entrés
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
                 <ReportsDataTable 
                   title="Mes Rapports" 
                   description="Liste de tous vos rapports"
@@ -446,15 +510,15 @@ const SectionDashboardPage: React.FC = () => {
 
         {/* History Tab */}
         {activeTab === 'history' && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Historique des rapports</CardTitle>
-                <CardDescription>
+          <div className="space-y-4 sm:space-y-6">
+            <Card className="overflow-hidden">
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-base sm:text-lg">Historique des rapports</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">
                   Consultez vos rapports archivés
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-3 sm:p-6 pt-0 sm:pt-0">
                 <ReportsDataTable 
                   title="Historique" 
                   description="Vos rapports antérieurs"

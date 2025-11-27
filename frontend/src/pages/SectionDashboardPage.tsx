@@ -317,72 +317,73 @@ const SectionDashboardPage: React.FC = () => {
                 ) : (
                   <>
                     {/* Mobile: Cartes */}
-                    <div className="sm:hidden space-y-3">
+                    <div className="sm:hidden space-y-2">
                       {reports.map((report) => (
-                        <div key={report.id} className="bg-gradient-to-r from-slate-50 to-blue-50 border border-slate-200 rounded-lg p-3 space-y-2">
-                          <div className="flex justify-between items-start">
+                        <div key={report.id} className="bg-gradient-to-r from-slate-50 to-blue-50 border border-slate-200 rounded-lg p-2 space-y-1">
+                          <div className="flex justify-between items-start gap-2">
                             <div>
-                              <p className="text-xs font-semibold text-slate-600">Date</p>
-                              <p className="text-sm font-bold">{new Date(report.date).toLocaleDateString('fr-FR')}</p>
+                              <p className="text-xs font-semibold text-slate-600">📅 Date</p>
+                              <p className="text-xs font-bold">{new Date(report.date).toLocaleDateString('fr-FR')}</p>
                             </div>
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => handleDownloadReport(report)}
                               disabled={downloadingId === report.id}
-                              className="text-blue-600 hover:bg-blue-100"
+                              className="text-blue-600 hover:bg-blue-100 h-7 px-2 py-1 flex items-center gap-1 text-xs"
                             >
-                              <Download className="h-4 w-4" />
+                              <Download className="h-3 w-3" />
+                              <span>DL</span>
                             </Button>
                           </div>
-                          <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="grid grid-cols-2 gap-1 text-xs">
                             <div>
-                              <p className="font-semibold text-slate-600">Prédicateur</p>
-                              <p className="font-medium">{report.preacher}</p>
+                              <p className="font-semibold text-slate-600">🎤 Prédicateur</p>
+                              <p className="font-medium truncate">{report.preacher}</p>
                             </div>
                             <div>
-                              <p className="font-semibold text-slate-600">Total</p>
+                              <p className="font-semibold text-slate-600">👥 Total</p>
                               <p className="font-bold text-blue-600">{report.total_attendees}</p>
                             </div>
                             <div>
                               <p className="font-semibold text-slate-600">👨 Hommes</p>
-                              <p className="text-blue-500">{report.men}</p>
+                              <p className="text-blue-500 font-bold">{report.men}</p>
                             </div>
                             <div>
                               <p className="font-semibold text-slate-600">👩 Femmes</p>
-                              <p className="text-pink-500">{report.women}</p>
+                              <p className="text-pink-500 font-bold">{report.women}</p>
                             </div>
                             <div>
                               <p className="font-semibold text-slate-600">👧 Enfants</p>
-                              <p className="text-green-500">{report.children}</p>
+                              <p className="text-green-500 font-bold">{report.children}</p>
                             </div>
                             <div>
                               <p className="font-semibold text-slate-600">🧑 Jeunes</p>
-                              <p className="text-amber-500">{report.youth}</p>
+                              <p className="text-amber-500 font-bold">{report.youth}</p>
                             </div>
                           </div>
-                          <div>
+                          <div className="border-t border-slate-300 pt-1">
                             <p className="font-semibold text-slate-600 text-xs">💰 Offrande</p>
-                            <p className="font-bold text-amber-600">{(report.offering).toLocaleString('fr-FR')} XOF</p>
+                            <p className="font-bold text-amber-600 text-sm">{Math.round(report.offering / 1000)}K XOF</p>
                           </div>
                         </div>
                       ))}
                     </div>
 
-                    {/* Desktop: Table */}
-                    <div className="hidden sm:block overflow-x-auto">
-                      <table className="w-full text-xs sm:text-sm border-collapse">
+                    {/* Desktop & Tablet: Table avec scroll */}
+                    <div className="hidden sm:block overflow-x-auto rounded-lg border border-slate-200">
+                      <table className="w-full text-xs lg:text-sm">
                         <thead>
-                          <tr className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-left font-semibold border border-blue-800">Date</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-left font-semibold border border-blue-800">Prédicateur</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800">Total</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">👨</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">👩</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">👧</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800 hidden lg:table-cell">🧑</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-right font-semibold border border-blue-800">💰</th>
-                            <th className="py-2 sm:py-3 px-2 sm:px-4 text-center font-semibold border border-blue-800">Action</th>
+                          <tr className="bg-gradient-to-r from-blue-600 to-blue-700 text-white sticky top-0">
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-left font-semibold whitespace-nowrap">📅 Date</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-left font-semibold whitespace-nowrap">🎤 Prédicateur</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-right font-semibold whitespace-nowrap">👥 Total</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-right font-semibold whitespace-nowrap hidden lg:table-cell">👨 Hommes</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-right font-semibold whitespace-nowrap hidden lg:table-cell">👩 Femmes</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-right font-semibold whitespace-nowrap hidden lg:table-cell">👧 Enfants</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-right font-semibold whitespace-nowrap hidden lg:table-cell">🧑 Jeunes</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-right font-semibold whitespace-nowrap">💰 Offrande</th>
+                            <th className="py-2 lg:py-3 px-2 lg:px-4 text-center font-semibold whitespace-nowrap hidden sm:table-cell">⬇️ Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -393,39 +394,42 @@ const SectionDashboardPage: React.FC = () => {
                                 idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
                               } border-b border-slate-200 hover:bg-blue-50 transition`}
                             >
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 border border-slate-200 text-xs sm:text-sm">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-xs lg:text-sm whitespace-nowrap">
                                 {new Date(report.date).toLocaleDateString('fr-FR')}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 border border-slate-200 font-medium text-xs sm:text-sm">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 font-medium text-xs lg:text-sm truncate max-w-xs">
                                 {report.preacher}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 font-bold text-blue-600 text-xs sm:text-sm">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-right font-bold text-blue-600 text-xs lg:text-sm whitespace-nowrap">
                                 {report.total_attendees}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-blue-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-right text-blue-500 font-medium text-xs lg:text-sm whitespace-nowrap hidden lg:table-cell">
                                 {report.men}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-pink-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-right text-pink-500 font-medium text-xs lg:text-sm whitespace-nowrap hidden lg:table-cell">
                                 {report.women}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-green-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-right text-green-500 font-medium text-xs lg:text-sm whitespace-nowrap hidden lg:table-cell">
                                 {report.children}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 text-amber-500 font-medium text-xs sm:text-sm hidden lg:table-cell">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-right text-amber-500 font-medium text-xs lg:text-sm whitespace-nowrap hidden lg:table-cell">
                                 {report.youth}
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-right border border-slate-200 font-bold text-amber-600 text-xs sm:text-sm">
-                                {(report.offering).toLocaleString('fr-FR')} XOF
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-right font-bold text-amber-600 text-xs lg:text-sm whitespace-nowrap">
+                                {Math.round(report.offering / 1000)}K XOF
                               </td>
-                              <td className="py-2 sm:py-3 px-2 sm:px-4 text-center border border-slate-200">
+                              <td className="py-2 lg:py-3 px-2 lg:px-4 text-center hidden sm:table-cell">
                                 <Button
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => handleDownloadReport(report)}
                                   disabled={downloadingId === report.id}
-                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 h-7 w-7 p-0"
+                                  className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 h-7 px-2 py-1 flex items-center gap-1 text-xs mx-auto"
+                                  title="Télécharger le rapport"
                                 >
-                                  <Download className="h-3 sm:h-4 w-3 sm:w-4" />
+                                  <Download className="h-3 lg:h-4 w-3 lg:w-4" />
+                                  <span className="hidden lg:inline">Télécharger</span>
+                                  <span className="lg:hidden">DL</span>
                                 </Button>
                               </td>
                             </tr>

@@ -56,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
         </div>
       </div>
       {/* Sidebar mobile */}
-      <div className="lg:hidden fixed top-0 left-0 w-full z-40">
+      <div className="lg:hidden fixed top-0 left-0 w-full z-50">
         <div className="flex items-center justify-between bg-gradient-to-r from-blue-50 to-blue-100 border-b p-3">
           <div className="flex items-center gap-2">
             <img 
@@ -65,8 +65,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
               className="w-10 h-10"
             />
             <div>
-              <span className="font-bold text-blue-900 text-sm">Gestion d'Église</span>
-              <span className="ml-2 text-xs text-blue-600">{user?.role === 'admin' ? '✝️ Admin' : user?.sectionName || ''}</span>
+              <span className="font-bold text-blue-900 text-sm">Gestion d'Église✝️</span>
+              <span className="ml-2 text-xs text-blue-600">{user?.role === 'admin' ? 'Admin' : user?.sectionName || ''}</span>
             </div>
           </div>
           <button onClick={() => setOpen(o => !o)} className="text-blue-600 font-bold text-lg">☰</button>
